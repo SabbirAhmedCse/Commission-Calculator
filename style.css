@@ -1,0 +1,147 @@
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Time New Romans;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            display: inline-flex;
+            text-align: center;
+            font-size: 17px;
+            padding-left: 10px;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        h6 {
+            margin: 0;
+            color: #ff0000;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 100%;
+            margin: auto;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        /*---------------------------
+                    select item
+        -----------------------------*/
+        .select-button-option {
+            display: flex;
+            width: 45%;
+            justify-content: space-between;
+
+        }
+
+        .select-button-option input{
+            width: 30%;
+            font-size: 20px;
+            font-family: Time New Romans;
+            font-weight: 900;
+            border: none;
+            padding: 7px 0;
+            border-radius: 5px;
+            outline-style: none;
+            color: #fff;
+            background-color: #BF2519;
+        }
+.select-button-option input:hover{
+    cursor: pointer; 
+    background-color: #000000;
+}
+
+
+
+        /*---------------------------
+            select item
+        -----------------------------*/
+
+        input[type=text],
+        input[type=number] {
+            width: 50%;
+            display: inline-block;
+            font-size: 20px;
+            font-family: Time New Romans;
+            text-align: center;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            font-weight: 500;
+        }
+
+
+        label {
+            padding: 5px 5px 5px 0;
+            font-size: 20px;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .col-property {
+            float: left;
+            width: 30%;
+            margin-top: 6px;
+        }
+
+        .col-value {
+            float: left;
+            width: 70%;
+            margin-top: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .netcommission {
+            width: 70%;
+            margin-top: 6px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .col-value input {
+            width: 45%;
+        }
+
+        .netcommission input {
+            width: 45%;
+            border: 3px solid #aaa;
+
+        }
+
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+            
+            .select-button-option {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+        }
+
+            .col-property,
+            .col-value,
+            .netcommission,
+            input[type=submit] {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }

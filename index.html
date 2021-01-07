@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Commission Calculator</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    
+    <style>
+        
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-property">
+                    <label>Deal Type</label>
+                    <h6>select deal tytpe</h6>
+                </div>
+                <div class="col-value">
+                    <div class="select-button-option">
+                        <input type="button" id="rentId" value="Rent" onclick="rent()">
+                        <input type="button" id="saleId" value="Sale" onclick="sale()">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-property">
+                    <label>Property Value</label>
+                    <h6>enter deal value</h6>
+                </div>
+                <div class="col-value">
+                    <input type="text" id="propertyValue" class="number" placeholder="ADE1,000,000" onkeyup="autoCalculation()">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-property">
+                    <label>Deal Commission %</label>
+                    <h6>enter commission %</h6>
+                </div>
+                <div class="col-value">
+                    <input type="text" id="dealCommissionPercent" placeholder="2%" onkeyup="autoCalculation()" />
+                    <input type="text" id="dealCommission" class="number" placeholder="ADE20,000" onkeyup="autoCalculation()" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-property">
+                    <label>External Broker Share (A2A)</label>
+                    <h6>enter %</h6>
+                </div>
+                <div class="col-value">
+                    <input type="text" id="externalBrokerSharePercent" placeholder="50%" onkeyup="autoCalculation()" />
+                    <input type="text" id="externalBrokerShare" class="number" placeholder="ADE10,000" onkeyup="autoCalculation()" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-property">
+                    <label>Company Share</label>
+                    <h6>enter %</h6>
+                </div>
+                <div class="col-value">
+                    <input type="text" id="companySharePercent" placeholder="50%" onkeyup="autoCalculation()" />
+                    <input type="text" id="companyShare" placeholder="ADE5,000" onkeyup="autoCalculation()" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-property">
+                    <label>Deductibles</label>
+                    <h6>enter amount if applicable</h6>
+                </div>
+                <div class="col-value">
+                    <input type="text" id="deductibles" class="number" value="0" placeholder="100" onkeyup="autoCalculation()" />
+                    <input type="text" id="deductiblesReduced" class="number"  placeholder="ADE4,000" onkeyup="autoCalculation()" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-property">
+                    <label>Net Commission</label>
+                    <h6>total commission receivable</h6>
+                </div>
+                <div class="netcommission">
+                    <input type="text" id="netCommission" placeholder="ADE4,000" onkeyup="autoCalculation()" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        $('input.number').keyup(function(event) {
+
+            // skip for arrow keys
+            if (event.which >= 37 && event.which <= 40) return;
+
+            // format number
+            $(this).val(function(index, value) {
+                return value
+                    .replace(/\D/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            });
+        });
+
+        let rent = () => {
+            document.getElementById('dealCommissionPercent').value = 2 + ' %';
+            window.onload;
+        };
+
+        let sale = () => {
+            document.getElementById('dealCommissionPercent').value = 5 + ' %';
+        };
+
+        let autoCalculation = () => {
+            var formatter = new Intl.NumberFormat('en-us');
+
+
+            //Type variable
+            let propertyValue = document.getElementById('propertyValue').value;
+            let dealCommissionPercent = document.getElementById('dealCommissionPercent').value;
+            let externalBrokerSharePercent = document.getElementById('externalBrokerSharePercent').value;
+            let companySharePercent = document.getElementById('companySharePercent').value;
+            let deductibles = document.getElementById('deductibles').value;
+
+
+            let dealCommission = document.getElementById('dealCommission');
+            var externalBrokerShare = document.getElementById('externalBrokerShare');
+            var companyShare = document.getElementById('companyShare');
+            var deductiblesReduced = document.getElementById('deductiblesReduced');
+            var netCommission = document.getElementById('netCommission');
+
+
+
+            dealCommission.value = dealCommission = formatter.format(parseInt(propertyValue.replaceAll(",", "")) * (parseInt(dealCommissionPercent) / 100));
+
+            
+                externalBrokerShare.value = externalBrokerShare = formatter.format(parseInt(dealCommission.replaceAll(",", "")) * (parseInt(externalBrokerSharePercent) / 100));
+            
+
+            
+                companyShare.value = companyShare = formatter.format(parseInt(externalBrokerShare.replaceAll(",", "")) * (parseInt(companySharePercent) / 100));
+            
+
+
+            
+                deductiblesReduced.value = deductiblesReduced = formatter.format(parseInt(companyShare.replaceAll(",", "")) - (parseInt(deductibles.replaceAll(",", ""))));
+
+                netCommission.value = netCommission = formatter.format(parseInt(deductiblesReduced.replaceAll(",", "")));
+            
+            console.log(deductibles);
+            if(deductibles == false)
+            deductiblesReduced.value = 0;
+
+
+
+
+
+            console.log(document.getElementById('dealCommission').value);
+
+            /*  propertyValue = parseInt(propertyValue.value);
+              console.log(propertyValue);
+              dealCommissionPercent = parseInt(dealCommissionPercent.value);
+              console.log(dealCommissionPercent);
+              externalBrokerSharePercent = parseInt(externalBrokerSharePercent.value);
+              console.log(externalBrokerSharePercent);
+              companySharePercent = parseInt(companySharePercent.value);
+              deductibles = parseInt(deductibles.value);
+              companyShare = parseInt(companyShare.value);
+
+              dealCommission.value = (dealCommissionPercent / 100) * propertyValue;
+              externalBrokerShare.value = (externalBrokerSharePercent / 100) * dealCommission;
+              companyShare.value = (companySharePercent / 100) * externalBrokerShare;
+              deductiblesReduced.value = companyShare - deductibles;
+              netCommission.value = deductiblesReduced; 
+              
+              RIO:
+              var totalCharge = (parseInt(propertySize.replaceAll(",", "")) * parseInt(serviceCharge.replaceAll(",", "")));
+              if (!isNaN(totalCharge)) {
+                  document.getElementById('yearlyServiceCharge').value = formatter.format(totalCharge);
+              }
+              
+              
+              */
+
+        };
+    </script>
+</body>
+
+</html>
