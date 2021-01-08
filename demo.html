@@ -1,15 +1,141 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Commission Calculator</title>
-    <link rel="stylesheet" href="style.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     
+    
+    <style>
+                * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Time New Romans;
+        }
+
+        h6 {
+            margin: 0;
+            color: #808080;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 100%;
+            margin: auto;
+            border-radius: 5px;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        /*---------------------------
+                    select item
+        -----------------------------*/
+        .select-button-option {
+            display: flex;
+            width: 100%;
+            border: 2px solid #FE2727;
+            justify-content: space-between;
+            outline-style: none;
+            margin-top: 6px;
+            border-radius: 5px;
+            font-size: 20px;
+            padding: 5px;
+            color: #000;
+            font-family: Time New Romans;
+
+        }
+
+        .select-button-option option {
+            width: 30%;
+            font-size: 20px;
+            font-family: Time New Romans;
+            padding: 5px 0;
+            border-radius: 5px;
+            color: #000;
+            outline-style: none;
+        }
+
+        .select-button-option input:hover {
+            cursor: pointer;
+            background-color: #000000;
+        }
+
+
+
+        /*---------------------------
+            select item
+        -----------------------------*/
+
+        input[type=text],
+        input[type=number] {
+            width: 50%;
+            display: inline-block;
+            font-size: 20px;
+            font-family: Time New Romans;
+            text-align: center;
+            padding: 5px;
+            border: 2px solid #FE2727;
+            outline: none;
+            border-radius: 5px;
+            resize: vertical;
+            font-weight: 500;
+        }
+
+
+        label {
+            font-size: 20px;
+            font-weight: 500;
+            color: #000;
+            display: inline-block;
+        }
+
+        .col-property {
+            float: left;
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        .col-value {
+            float: left;
+            width: 100%;
+            margin-top: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+
+        .col-value input {
+            width: 45%;
+        }
+
+        .col-value #propertyValue {
+            width: 100%;
+        }
+
+        .totalCommission label {
+            font-size: 25px;
+            font-weight: 700;
+            border-color: red;
+        }
+
+        .netcommissions {
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        .netcommissions input {
+            width: 100%;
+            margin-top: 10px;
+            border: 3px solid #FE2727;
+
+        }
+    </style>
 
 </head>
 
@@ -91,8 +217,8 @@
         </form>
     </div>
 
-
-    <script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
         $('input.number').keyup(function(event) {
 
             // skip for arrow keys
