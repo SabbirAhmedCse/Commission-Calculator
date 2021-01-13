@@ -105,7 +105,16 @@
         .col-value #propertyValue {
             width: 100%;
         }
+.deductibles{
+    width: 100%;
+            margin-top: 6px;
+}
+.deductibles input {
+            width: 100%;
+            margin-top: 10px;
+            border: 2px solid #FE2727;
 
+        }
         .totalCommission label {
             font-size: 25px;
             font-weight: 700;
