@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <section class="container">
         <form>
             <div class="row">
                 <div class="col-property">
@@ -36,7 +36,7 @@
                     <h6>enter deal value</h6>
                 </div>
                 <div class="col-value">
-                    <input type="text" id="propertyValue" class="number" value="0" onkeyup="autoCalculation()">
+                    <input type="text" id="propertyValue" class="number" value="0" onclick="this.select()" onkeyup="autoCalculation()">
                 </div>
             </div>
             <div class="row">
@@ -45,7 +45,7 @@
                     <h6>enter commission %</h6>
                 </div>
                 <div class="col-value">
-                    <input type="text" id="dealCommissionPercent" value="0 %" onkeyup="autoCalculation()" />
+                    <input type="text" id="dealCommissionPercent" onclick="this.select()" value="0 %" onchange="autoCalculation()" />
                     <input type="text" id="dealCommission" class="number" value = "0" onkeyup="autoCalculation()" />
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     <h6>enter %</h6>
                 </div>
                 <div class="col-value">
-                    <input type="text" id="externalBrokerSharePercent" value = "0 %" onkeyup="autoCalculation()"/>
+                    <input type="text" id="externalBrokerSharePercent" value = "0 %" onclick="this.select()"  onchange="autoCalculation()"/>
                     <input type="text" id="externalBrokerShare" class="number" value = "0" onkeyup="autoCalculation()" />
                 </div>
             </div>
@@ -65,7 +65,7 @@
                     <h6>enter %</h6>
                 </div>
                 <div class="col-value">
-                    <input type="text" id="companySharePercent" value = "0 %" onkeyup="autoCalculation()" />
+                    <input type="text" id="companySharePercent" value = "0 %" onclick="this.select()" onchange="autoCalculation()" />
                     <input type="text" id="companyShare" value = "0" onkeyup="autoCalculation()" />
                 </div>
             </div>
@@ -75,7 +75,7 @@
                     <h6>enter amount if applicable</h6>
                 </div>
                 <div class="deductibles">
-                    <input type="text" id="deductibles" class="number" value="0" onkeyup="autoCalculation()" />
+                    <input type="text" id="deductibles" class="number" value="0" onclick="this.select()" onkeyup="autoCalculation()" />
                 </div>
             </div>
             <div class="row">
@@ -88,16 +88,23 @@
                 </div>
             </div>
         </form>
-    </div>
+    </section>
+    <footer>
+        <div class="footer">
+             All Right Reserved Sabbir Ahmed.
+        </div>
+    </footer>
 
 
     <script>
+        
+        // Formatter
         $('input.number').keyup(function(event) {
 
             // skip for arrow keys
             if (event.which >= 37 && event.which <= 40) return;
 
-            // format number
+            // Number Format
             $(this).val(function(index, value) {
                 return value
                     .replace(/\D/g, "")
@@ -106,8 +113,10 @@
         });
 
         let selectValue = () => {
+            
             let selectedValue = document.getElementById("list").value;
 
+            // Selected Value for Rent 
             if (selectedValue === "Rent") {
                 document.getElementById('propertyValue').value = '50,000';
                 document.getElementById('dealCommissionPercent').value = 5 + ' %';
@@ -120,6 +129,8 @@
                 document.getElementById('deductibles').value = '500';
                 document.getElementById('netCommission').value = '1,525';
             } 
+            
+            // Selected Value for Sale 
             if(selectedValue === "Sale") {
                 document.getElementById('propertyValue').value = '1,000,000';
                 document.getElementById('dealCommissionPercent').value = 2 + ' %';
@@ -132,19 +143,28 @@
                 document.getElementById('netCommission').value = '15,200';
             }
         }
-
-
+        
+        // calculation
         let autoCalculation = () => {
+            
+            // Number format
             var formatter = new Intl.NumberFormat('en-us');
 
-            //Type variable
+            // Manual Part
             let propertyValue = document.getElementById('propertyValue').value;
+            
             let dealCommissionPercent = document.getElementById('dealCommissionPercent').value;
+            document.getElementById('dealCommissionPercent').value = parseInt(dealCommissionPercent) + " %";
+            
             let externalBrokerSharePercent = document.getElementById('externalBrokerSharePercent').value;
+            document.getElementById('externalBrokerSharePercent').value = parseInt(externalBrokerSharePercent) + " %";
+            
             let companySharePercent = document.getElementById('companySharePercent').value;
+            document.getElementById('companySharePercent').value = parseInt(companySharePercent) + " %";
+            
             let deductibles = document.getElementById('deductibles').value;
 
-
+            //Auto Calculation Part
             let dealCommissionId = document.getElementById('dealCommission');
             let externalBrokerShareId = document.getElementById('externalBrokerShare');
             let companyShareId = document.getElementById('companyShare');
@@ -152,12 +172,8 @@
             let netCommissionId = document.getElementById('netCommission');
             
             
-            
-            
-
             dealCommission = parseInt(propertyValue.replaceAll(",", "")) * (parseInt(dealCommissionPercent) / 100);
             dealCommission.value = formatter.format(dealCommission);
-            console.log(dealCommission);
 
             externalBrokerShare = dealCommission * (parseInt(externalBrokerSharePercent) / 100);
 
@@ -179,7 +195,7 @@
             companyShareId.value = formatter.format(companyShare);
             if(companySharePercent === " %" )
                 companyShareId.value = 0;
-
+ 
             netCommissionId.value = formatter.format(dealCommission - (externalBrokerShare + companyShare + parseInt(deductibles.replaceAll(",", ""))));
 
 
